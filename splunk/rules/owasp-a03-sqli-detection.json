@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A03_SQLi_Detection",
+  "description": "HTTP request parametrlərində SQL Injection cəhdlərini aşkar edir (UNION SELECT, tautology, SLEEP() time-based, SQL comment sequence-ləri).",
+  "search": "index=web_logs sourcetype=access_combined (uri_query=\"*UNION*SELECT*\" OR uri_query=\"*OR 1=1*\" OR uri_query=\"*SLEEP(*\" OR uri_query=\"*--*\" OR uri_query=\"*' OR '*\") | stats count by clientip, uri_path, uri_query | where count > 0",
+  "severity": 4,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1190"],
+  "owasp_category": "A03:2021 - Injection",
+  "false_positives": "Daxili pentest/zəiflik skanerləri (Burp, OWASP ZAP) eyni pattern-ləri yarada bilər; bunlar üçün known_scanner_ip lookup ilə istisna edilməlidir."
+}
