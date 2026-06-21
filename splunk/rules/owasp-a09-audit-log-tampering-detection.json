@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A09_Audit_Log_Tampering_Detection",
+  "description": "Audit/security logging-in silinməsi və ya deaktiv edilməsini aşkar edir — Security Logging and Monitoring xətası, hücumçunun izini gizlədə bilər.",
+  "search": "index=system_logs (EventCode=1102 OR action=\"clear_log\" OR action=\"disable_audit\" OR message=\"*Audit log cleared*\")",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-30m",
+  "latest_time": "now",
+  "cron_schedule": "*/10 * * * *",
+  "mitre_attack": ["T1070.001"],
+  "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+  "false_positives": "Planlaşdırılmış log rotasiyası/baxım; təsdiqlənmiş baxım pəncərələri ilə korrelyasiya et."
+}

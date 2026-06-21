@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A01_IDOR_Enumeration_Detection",
+  "description": "Tək bir client tərəfindən ardıcıl/sürətli obyekt ID enumerasiyası vasitəsilə IDOR (Insecure Direct Object Reference) istismarını aşkar edir.",
+  "search": "index=web_logs sourcetype=access_combined uri_path=\"*/api/*/*\" | rex field=uri_path \"/(?<object_id>\\d+)$\" | stats dc(object_id) as unique_ids count by clientip, uri_path | where unique_ids > 20",
+  "severity": 4,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/10 * * * *",
+  "mitre_attack": ["T1190"],
+  "owasp_category": "A01:2021 - Broken Access Control",
+  "false_positives": "Legitim bulk export/admin alətləri; bilinən servis hesablarını istisna et."
+}

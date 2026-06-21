@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A08_Webshell_Upload_Detection",
+  "description": "Upload endpoint-lərinə şübhəli icra olunan script fayllarının (potensial web shell) yüklənməsini aşkar edir — software/data integrity xətasının əlamətidir.",
+  "search": "index=web_logs sourcetype=access_combined method=POST uri_path=\"*upload*\" (uri_query=\"*.php*\" OR uri_query=\"*.jsp*\" OR uri_query=\"*.asp*\" OR uri_query=\"*.aspx*\") status=200 | stats count by clientip, uri_path, uri_query",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1505.003"],
+  "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+  "false_positives": "Legitim CMS plugin quraşdırıcıları; upload qovluğunun icra olunan kontentə icazə verib-vermədiyini yoxla."
+}

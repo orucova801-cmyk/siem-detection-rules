@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A07_Brute_Force_Login_Detection",
+  "description": "Tək mənbə IP-dən tək hesaba qarşı təkrarlanan autentifikasiya uğursuzluqları vasitəsilə brute-force giriş cəhdlərini aşkar edir.",
+  "search": "index=app_logs sourcetype=auth_audit action=\"login_failed\" | bucket _time span=5m | stats count by src_ip, user, _time | where count > 5",
+  "severity": 4,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1110.001"],
+  "owasp_category": "A07:2021 - Identification and Authentication Failures",
+  "false_positives": "Şifrəsini unudub əl ilə təkrar cəhd edən istifadəçilər; nəzərə alınan həddə (5/5dəq) bu səs-küy minimuma endirilib."
+}

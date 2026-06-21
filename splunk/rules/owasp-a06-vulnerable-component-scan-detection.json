@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A06_Vulnerability_Scanner_Detection",
+  "description": "User-Agent başlığında məlum avtomatik zəiflik-skan alətlərinin imzalarını aşkar edir — köhnəlmiş/zəif komponentlərin kəşfiyyatına işarədir.",
+  "search": "index=web_logs sourcetype=access_combined (http_user_agent=\"*sqlmap*\" OR http_user_agent=\"*Nikto*\" OR http_user_agent=\"*nmap*\" OR http_user_agent=\"*Acunetix*\" OR http_user_agent=\"*w3af*\") | stats count by clientip, http_user_agent",
+  "severity": 4,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1595.002"],
+  "owasp_category": "A06:2021 - Vulnerable and Outdated Components",
+  "false_positives": "İcazəli daxili pentest sınaqları; pentest komandasının IP-lərini sınaq dövründə istisna et."
+}

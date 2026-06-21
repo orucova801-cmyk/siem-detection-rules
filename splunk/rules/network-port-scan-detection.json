@@ -1,0 +1,15 @@
+{
+  "name": "NET_Port_Scan_Reconnaissance_Detection",
+  "description": "Tək mənbə IP-nin qısa zaman aralığında çoxlu fərqli destinasiya portu ilə əlaqə qurmasını aşkar edir — şəbəkə kəşfiyyatı/port skan əlaməti.",
+  "search": "index=network_logs sourcetype=firewall | bucket _time span=2m | stats dc(dest_port) as unique_ports count by src_ip, _time | where unique_ports > 15",
+  "severity": 3,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-10m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1595.001"],
+  "owasp_category": "N/A - Network Reconnaissance (Pre-Attack)",
+  "false_positives": "Daxili zəiflik skan alətləri, load balancer health check-ləri; skaner IP-lərini istisna et."
+}

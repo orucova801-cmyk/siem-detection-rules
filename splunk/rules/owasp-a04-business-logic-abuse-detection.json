@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A04_Excessive_Password_Reset_Requests",
+  "description": "Tək mənbədən yüksək tezlikli password-reset/OTP sorğuları vasitəsilə business logic abuse-i (insecure design əlaməti) aşkar edir.",
+  "search": "index=app_logs sourcetype=auth_audit action=\"password_reset_request\" | bucket _time span=5m | stats count by src_ip, _time | where count > 10",
+  "severity": 3,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1110"],
+  "owasp_category": "A04:2021 - Insecure Design",
+  "false_positives": "Paylaşılan korporativ NAT IP-lər; istifadəçi müxtəlifliyi (dc(user)) ilə korrelyasiya et."
+}

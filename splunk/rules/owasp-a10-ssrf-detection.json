@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A10_SSRF_Detection",
+  "description": "Request parametrlərinin daxili IP aralıqlarına və ya cloud metadata endpoint-lərinə yönəldiyi Server-Side Request Forgery cəhdlərini aşkar edir.",
+  "search": "index=web_logs sourcetype=access_combined (uri_query=\"*169.254.169.254*\" OR uri_query=\"*127.0.0.1*\" OR uri_query=\"*localhost*\" OR uri_query=\"*10.0.*\" OR uri_query=\"*192.168.*\") uri_query=\"*url=*\" | stats count by clientip, uri_path, uri_query",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1190", "T1078.004"],
+  "owasp_category": "A10:2021 - Server-Side Request Forgery (SSRF)",
+  "false_positives": "Legitim daxili health-check callback-ləri; bilinən daxili servis URL-lərini istisna et."
+}

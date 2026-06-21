@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A03_Command_Injection_Detection",
+  "description": "Request parametrlərində OS command injection cəhdlərini aşkar edir (shell metakarakterləri, command execution pattern-ləri).",
+  "search": "index=web_logs sourcetype=access_combined (uri_query=\"*;cat *\" OR uri_query=\"*|whoami*\" OR uri_query=\"*&&ls*\" OR uri_query=\"*%3Bcat%20*\" OR uri_query=\"*$(curl*\" OR uri_query=\"*wget *\") | stats count by clientip, uri_path, uri_query | where count > 0",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1059"],
+  "owasp_category": "A03:2021 - Injection",
+  "false_positives": "Nadir hal; oxşar substring-lər daşıyan legitim API parametrləri ilə yoxlanılmalıdır."
+}

@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A05_Sensitive_File_Exposure_Attempt",
+  "description": "Security misconfiguration nəticəsində açıq qalan həssas konfiqurasiya/versiya-nəzarəti fayllarına (.env, .git, debug konsolu) çıxış cəhdlərini aşkar edir.",
+  "search": "index=web_logs sourcetype=access_combined (uri_path=\"*/.env*\" OR uri_path=\"*/.git/*\" OR uri_path=\"*/config.php*\" OR uri_path=\"*/debug*\" OR uri_path=\"*/phpinfo.php*\") status>=200 status<300 | stats count by clientip, uri_path, status",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-15m",
+  "latest_time": "now",
+  "cron_schedule": "*/5 * * * *",
+  "mitre_attack": ["T1592"],
+  "owasp_category": "A05:2021 - Security Misconfiguration",
+  "false_positives": "Daxili zəiflik skanları; skaner IP-lərini istisna et."
+}

@@ -1,0 +1,15 @@
+{
+  "name": "OWASP_A01_Privilege_Escalation_Detection",
+  "description": "Gözlənilməz istifadəçi rol/icazə yüksəlişi hadisələrini aşkar edir, xüsusilə admin/superuser rolunun dəyişiklik prosesindən kənar təyin edilməsini.",
+  "search": "index=app_logs sourcetype=auth_audit (action=\"role_change\" OR action=\"permission_grant\") (new_role=\"admin\" OR new_role=\"superuser\") | stats count by user, target_user, src_ip, new_role",
+  "severity": 5,
+  "alert_type": "number of events",
+  "alert_comparator": "greater than",
+  "alert_threshold": 0,
+  "earliest_time": "-30m",
+  "latest_time": "now",
+  "cron_schedule": "*/10 * * * *",
+  "mitre_attack": ["T1078", "T1098"],
+  "owasp_category": "A01:2021 - Broken Access Control",
+  "false_positives": "Yeni adminlərin legitim onboarding prosesi; change-ticket sistemi ilə korrelyasiya et."
+}
