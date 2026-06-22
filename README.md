@@ -108,5 +108,5 @@ Skript hər rule üçün avtomatik olaraq:
 
 ## Müəllif
 
-Aytac — İnformasiya Təhlükəsizliyi, Bakı Mühəndislik Universiteti
+Aytac — İnformasiya Təhlükəsizliyi, MilliSec
 
